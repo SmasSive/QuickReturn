@@ -57,7 +57,7 @@ public class AbsListViewScrollTarget
         ListView internalListView = (ListView) listView;
         if (POSITION_TOP == getPosition()) {
             int headerViewsCount = internalListView.getHeaderViewsCount();
-            if (headerViewsCount > 0) {
+            if (headerViewsCount > 0 && pos < headerViewsCount + 1) {
                 view = listView.getChildAt(headerViewsCount);
             }
         }
