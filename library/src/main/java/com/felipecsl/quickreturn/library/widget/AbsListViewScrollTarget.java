@@ -53,6 +53,15 @@ public class AbsListViewScrollTarget
 
     int pos = listView.getFirstVisiblePosition();
     View view = listView.getChildAt(0);
+    if (listView instanceof ListView) {
+        ListView internalListView = (ListView) listView;
+        if (POSITION_TOP == getPosition()) {
+            int headerViewsCount = internalListView.getHeaderViewsCount();
+            if (headerViewsCount > 0) {
+                view = listView.getChildAt(headerViewsCount);
+            }
+        }
+    }
     return getAdapter().getPositionVerticalOffset(pos) - view.getTop();
   }
 
