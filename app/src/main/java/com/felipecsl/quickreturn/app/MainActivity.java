@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -64,6 +66,13 @@ public class MainActivity extends ActionBarActivity implements AbsListView.OnScr
     if (viewGroup instanceof AbsListView) {
       int numColumns = (viewGroup instanceof GridView) ? 3 : 1;
       AbsListView absListView = (AbsListView) viewGroup;
+      if (absListView instanceof ListView) {
+          LayoutInflater inflater = LayoutInflater.from(this);
+          View headerView = inflater.inflate(R.layout.list_header_item, null);
+          View headerView2 = inflater.inflate(R.layout.list_header_item2, null);
+          ((ListView) absListView).addHeaderView(headerView);
+          ((ListView) absListView).addHeaderView(headerView2);
+      }
       absListView.setAdapter(new QuickReturnAdapter(adapter, numColumns));
     }
 
